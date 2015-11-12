@@ -40,6 +40,7 @@ class Adaptability
         else
         {
             $log_path = $this->get_config_value( 'log_path' );
+
             if( file_exists( $log_path ) )
             {
                 $log_path .= $log_name . ".log";
