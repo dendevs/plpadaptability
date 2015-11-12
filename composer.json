@@ -1,8 +1,10 @@
 {
-    "name": "dendev/plpskeleton",
-    "description": "skeleton for pulpy project",
+    "name": "dendev/plpadaptability",
+    "description": "adaptability for pulpy project",
     "type": "libs",
     "require": {
+        "herrera-io/wise": "^1.0@dev",
+        "herrera-io/json": "^1.0@dev"
     },
     "require-dev": {
     },
@@ -15,7 +17,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "DenDev\\Plpskeleton\\": "src"
+            "DenDev\\Plpadaptability\\": "src"
         }
     }
 }
