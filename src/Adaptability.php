@@ -87,7 +87,7 @@ class Adaptability
         $this->_config = new Config( $config );
         if( method_exists( $this, '_set_default_config' ) )
         {
-            $this->_config->merge_default( $this->get_default_config() );
+            $this->_config->merge_default( $this->_set_default_config() );
         }
 
         return $ok;
