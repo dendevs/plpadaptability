@@ -23,7 +23,7 @@ class Adaptability
         return $this->_krl->get_kernel_service( $id_service, $config_file_with_ext );
     }
 
-    public function get_service_instance()
+    public function get_service_instance() // for service classe
     {
         return $this->_service;
     }

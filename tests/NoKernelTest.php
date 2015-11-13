@@ -11,9 +11,9 @@ class NoKernelTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( 'DenDev\Plpadaptability\NoKernel', $object );
 	}
 
-	public function test_get_service()
+	public function test_get_kernel_service()
 	{
 		$object = new NoKernel();
-		$this->assertFalse( $object->get_service( 'jkljkl' ) );
+		$this->assertFalse( $object->get_kernel_service( 'jkljkl' ) );
 	}
 }
