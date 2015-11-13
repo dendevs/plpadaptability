@@ -9,7 +9,7 @@ class NoKernel
         //echo "Appel de la méthode '$name' ". print_r( $args, true ). "\n";
     }
 
-    public function get_service( $id_service )
+    public function get_kernel_service( $id_service )
     {
         return false;
     }

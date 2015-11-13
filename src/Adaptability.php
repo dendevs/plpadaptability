@@ -19,7 +19,7 @@ class Adaptability
     // get
     public function get_service( $id_service ) // in NoKernel ?
     {
-        return $this->_krl->get_service( $id_service );
+        return $this->_krl->get_kernel_service( $id_service );
     }
 
     public function get_config_value( $config_name )
