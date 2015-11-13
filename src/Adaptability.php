@@ -27,6 +27,11 @@ class Adaptability
         return $this->_config->get_value( $config_name );
     }
 
+    public function get_config_values()
+    {
+        return $this->_config->get_values();
+    }
+
     // log
     public function write_log( $log_name, $message, $level, $extras ) // in NoKernel ?
     {
@@ -84,6 +89,7 @@ class Adaptability
     {
         $ok = false;
 
+        $config = ( is_null( $config ) || ! $config ) ? array() : $config;
         $this->_config = new Config( $config );
         if( method_exists( $this, '_set_default_config' ) )
         {
