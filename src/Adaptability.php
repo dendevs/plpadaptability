@@ -14,12 +14,18 @@ class Adaptability
     {
         $this->_set_krl( $krl );
         $this->_set_config( $config );
+        $this->_service = false;
     }
 
     // get
-    public function get_service( $id_service ) // in NoKernel ?
+    public function get_service( $id_service, $config_file_with_ext = false ) // in NoKernel ?
     {
-        return $this->_krl->get_kernel_service( $id_service );
+        return $this->_krl->get_kernel_service( $id_service, $config_file_with_ext );
+    }
+
+    public function get_service_instance()
+    {
+        return $this->_service;
     }
 
     public function get_config_value( $config_name )
