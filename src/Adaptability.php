@@ -28,9 +28,11 @@ class Adaptability
         return $this->_service;
     }
 
-    public function get_config_value( $config_name )
+    public function get_config_value( $config_name, $default_value = false )
     {
-        return $this->_config->get_value( $config_name );
+        $value = $this->_config->get_value( $config_name );
+
+        return ( $value ) ? $value : $default_value;
     }
 
     public function get_config_values()
