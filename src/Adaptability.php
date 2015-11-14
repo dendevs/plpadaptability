@@ -96,10 +96,17 @@ class Adaptability
         $ok = false;
 
         $config = ( is_null( $config ) || ! $config ) ? array() : $config;
-        $this->_config = new Config( $config );
-        if( method_exists( $this, '_set_default_config' ) )
+        if( is_object( $config ) )
         {
-            $this->_config->merge_default( $this->_set_default_config() );
+            $this->_config = $config;
+        }
+        else
+        {
+            $this->_config = new Config( $config );
+            if( method_exists( $this, '_set_default_config' ) )
+            {
+                $this->_config->merge_default( $this->_set_default_config() );
+            }
         }
 
         return $ok;
