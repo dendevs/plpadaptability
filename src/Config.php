@@ -11,36 +11,77 @@ class Config
 
 	public function __construct( $config = array() )
 	{
-		if( is_array( $config ) )
+		// default config
+		$config_path = $this->get_defaults_config_dir();
+		$defaults_config = $this->get_config_form_file( $config_path );
+
+		// args config
+		if( is_array( $config ) ) 
 		{
-			$this->_config = $config;
+			$values_config = $config;
+		}
+		else if( is_a( $config, 'DenDev\Plpadaptability\Config' ) )
+		{
+			$values_config = $config->get_values();
+		}
+		else if( file_exists( $config ) )
+		{
+			$values_config = $this->get_config_form_file( $config );
 		}
 		else
 		{
-			$config_file = $config;//dirname( __FILE__ )  . '/' . $config;
+			throw new \Exception( "config $config not found" );
+		}
 
-			if( file_exists( $config_file ) )
+		// merge configs
+		$this->_config = $this->merge_configs( $defaults_config, $values_config );
+	}
+
+	public function get_defaults_config_dir( $config_name = 'default.php' )
+	{
+		$config_path = dirname( __FILE__ ) . "/../configs/$config_name";
+		if( ! file_exists( $config_path ) )
+		{
+			$config_path = false;
+		}
+
+		return $config_path;
+	}
+
+	public function get_config_form_file( $config_file, $flat = false  )
+	{
+		$config = array();
+
+		if( file_exists( $config_file ) )
+		{
+			$wise = Wise::create( $config_file );
+			$wise->setCacheDir( sys_get_temp_dir() );
+			$wise->setCollector( new ResourceCollector() );	
+
+			if( $flat )
 			{
-				$this->_wise = Wise::create( $config_file ); // TODO file exist
-				$this->_wise->setCacheDir( sys_get_temp_dir() );
-				$this->_wise->setCollector( new ResourceCollector() );	
-
-				$this->_config = $this->_wise->load( $config_file );
+				$config = $wise->loadFlat( $config_file );
 			}
 			else
 			{
-				throw new \Exception( "config $config_file not found" );
+				$config = $wise->load( $config_file );
 			}
 		}
+
+		return $config;
 	}
 
-	public function get_value( $config_name )
+	public function get_value( $config_name, $default_value = false )
 	{
 		$value = false;
 
 		if( array_key_exists( $config_name, $this->_config ) )
 		{
 			$value = $this->_config[$config_name];
+		}
+		else if( $default_value )
+		{
+			$value = $default_value;
 		}
 
 		return $value;
@@ -56,17 +97,21 @@ class Config
 		return $this->_config[$key] = $value;
 	}
 
-	public function merge_default( $default_config )
+	public function merge_configs( $defaults_config, $values_config = false )
 	{
-		$ok = false;
+		$configs = array();
 
-		if( is_array( $default_config ) )
+		if( $values_config === false  )
 		{
-			$this->_config = array_merge( $default_config, $this->_config );
-			$ok = $this->_config;
+			$values_config = $this->_config;
 		}
 
-		return $ok;
+		if( is_array( $defaults_config ) )
+		{
+			$configs = array_merge( $defaults_config, $values_config );
+		}
+
+		return $configs;
 	}
 
 }
