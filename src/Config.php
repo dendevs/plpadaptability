@@ -9,32 +9,16 @@ class Config
 	private $_wise;
 	private $_config;
 
-	public function __construct( $config = array() )
+	public function __construct( $config_path )
 	{
-		// default config
-		$config_path = $this->get_defaults_config_dir();
-		$this->_config = $this->get_config_form_file( $config_path );
-
-		// args config
-		if( is_array( $config ) ) 
+		if( file_exists( $config_path ) )
 		{
-			$values_config = $config;
-		}
-		else if( is_a( $config, 'DenDev\Plpadaptability\Config' ) )
-		{
-			$values_config = $config->get_values();
-		}
-		else if( file_exists( $config ) )
-		{
-			$values_config = $this->get_config_form_file( $config );
+			$this->_config = $this->get_config_form_file( $config_path );
 		}
 		else
 		{
-			throw new \Exception( "config $config not found" );
+			throw new \Exception( "config $config_path not found" );
 		}
-
-		// merge configs
-		$this->_config = $this->merge_configs( $values_config );
 	}
 
 	public function get_defaults_config_dir( $config_name = 'default.php' )
@@ -48,23 +32,23 @@ class Config
 		return $config_path;
 	}
 
-	public function get_config_form_file( $config_file, $flat = false  )
+	public function get_config_form_file( $config_path, $flat = false  )
 	{
 		$config = array();
 
-		if( file_exists( $config_file ) )
+		if( file_exists( $config_path ) )
 		{
-			$wise = Wise::create( $config_file );
+			$wise = Wise::create( $config_path );
 			//$wise->setCacheDir( sys_get_temp_dir() );
 			$wise->setCollector( new ResourceCollector() );	
 
 			if( $flat )
 			{
-				$config = $wise->loadFlat( $config_file );
+				$config = $wise->loadFlat( $config_path );
 			}
 			else
 			{
-				$config = $wise->load( $config_file );
+				$config = $wise->load( $config_path );
 			}
 		}
 

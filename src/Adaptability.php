@@ -10,10 +10,10 @@ class Adaptability
     protected $_service;
 
 
-    public function __construct( $krl = false, $config = array() )
+    public function __construct( $krl = false, $config_path = false )
     {
         $this->_set_krl( $krl );
-        $this->_set_config( $config );
+        $this->_set_config( $config_path );
         $this->_service = false;
     }
 
@@ -69,7 +69,7 @@ class Adaptability
             }
             else
             {
-				throw new \Exception( "log_path $log_path not found" );
+                throw new \Exception( "log_path $log_path not found" );
             }
         }
 
@@ -93,25 +93,16 @@ class Adaptability
         return $ok;
     }
 
-    private function _set_config( $config )
+    private function _set_config( $config_path )
     {
-        $ok = false;
-
-        $config = ( is_null( $config ) || ! $config ) ? array() : $config;
-        if( is_object( $config ) )
+        if( ! $config_path )
         {
-            $this->_config = $config;
-        }
-        else
-        {
-            $this->_config = new Config( $config );
-            if( method_exists( $this, '_set_default_config' ) )
-            {
-                $this->_config->merge_default( $this->_set_default_config() );
-            }
+            $config_path = dirname( __FILE__ ) . '/../configs/default.php';
         }
 
-        return $ok;
+        $this->_config = new Config( $config_path );
+
+        return $this->_config;
     }
 }
 
