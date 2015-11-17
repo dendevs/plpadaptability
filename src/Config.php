@@ -55,7 +55,7 @@ class Config
 		if( file_exists( $config_file ) )
 		{
 			$wise = Wise::create( $config_file );
-			$wise->setCacheDir( sys_get_temp_dir() );
+			//$wise->setCacheDir( sys_get_temp_dir() );
 			$wise->setCollector( new ResourceCollector() );	
 
 			if( $flat )
@@ -103,7 +103,12 @@ class Config
 
 		if( is_array( $updated_config ) )
 		{
+			print_r( $updated_config );
+			echo "\n config \n";
+			print_r( $this->_config );
 			$this->_config= array_merge( $this->_config, $updated_config );
+			echo "\n RES \n";
+			print_r( $this->_config );
 		}
 
 		return $this->_config;
