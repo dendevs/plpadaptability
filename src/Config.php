@@ -103,12 +103,7 @@ class Config
 
 		if( is_array( $updated_config ) )
 		{
-			print_r( $updated_config );
-			echo "\n config \n";
-			print_r( $this->_config );
 			$this->_config= array_merge( $this->_config, $updated_config );
-			echo "\n RES \n";
-			print_r( $this->_config );
 		}
 
 		return $this->_config;
