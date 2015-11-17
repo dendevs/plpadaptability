@@ -13,6 +13,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 		$this->_config_path = sys_get_temp_dir() . '/test_config.php';
 		file_put_contents( $this->_config_path, "<?php return array( 'test' => 'test config file ok', 'test_1' => 'value 1 from file', 'test_2' => 'value 2 from file' );" );
 	}
+
 	public function test_default_instanciate()
 	{
 		$object = new Config();

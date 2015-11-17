@@ -13,7 +13,7 @@ class Config
 	{
 		// default config
 		$config_path = $this->get_defaults_config_dir();
-		$defaults_config = $this->get_config_form_file( $config_path );
+		$this->_config = $this->get_config_form_file( $config_path );
 
 		// args config
 		if( is_array( $config ) ) 
@@ -34,8 +34,6 @@ class Config
 		}
 
 		// merge configs
-		$this->_config = $defaults_config;
-
 		$this->_config = $this->merge_configs( $values_config );
 	}
 
