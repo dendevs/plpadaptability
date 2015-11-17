@@ -13,7 +13,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 		$this->_config_path = sys_get_temp_dir() . '/test_config.php';
 		file_put_contents( $this->_config_path, "<?php return array( 'test' => 'test config file ok', 'test_1' => 'value 1 from file', 'test_2' => 'value 2 from file' );" );
 	}
-
 	public function test_default_instanciate()
 	{
 		$object = new Config();
@@ -70,7 +69,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'default value', $object->get_value( 'not_found', 'default value' ) );
 	}
 
-	/*
 	public function test_get_value()
 	{
 		$test_file = sys_get_temp_dir() . '/test_config.php';
@@ -87,11 +85,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'test tmp ok', $object->get_value( 'test_tmp' ) );
 	}
 
-	public function test_merge_default()
+	public function test_merge_configs()
 	{
-		$default_value = array( 'test' => 'default valeur', 'existe' => 'valeur non redefinie'  );
-		$object = new Config( array( 'test' => 'nouvel valeur' ) );
-		$this->assertArrayHasKey( 'test', $object->merge_default( $default_value ) );
+		$updated_values = array( 'test' => 'nouvel valeur', 'existe' => 'valeur non redefinie'  );
+		$object = new Config( array( 'test' => 'default valeur' ) );
+		$this->assertArrayHasKey( 'test', $object->merge_configs( $updated_values ) );
 		$this->assertEquals( 'nouvel valeur', $object->get_value( 'test' ) );
 		$this->assertEquals( 'valeur non redefinie', $object->get_value( 'existe' ) );
 	}
@@ -104,7 +102,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 			unlink( $test_file );
 		}
 	}
-	 */
 }
 
 class ChildConfig extends Config

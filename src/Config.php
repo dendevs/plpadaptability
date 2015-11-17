@@ -34,7 +34,9 @@ class Config
 		}
 
 		// merge configs
-		$this->_config = $this->merge_configs( $defaults_config, $values_config );
+		$this->_config = $defaults_config;
+
+		$this->_config = $this->merge_configs( $values_config );
 	}
 
 	public function get_defaults_config_dir( $config_name = 'default.php' )
@@ -97,21 +99,16 @@ class Config
 		return $this->_config[$key] = $value;
 	}
 
-	public function merge_configs( $defaults_config, $values_config = false )
+	public function merge_configs( $updated_config )
 	{
 		$configs = array();
 
-		if( $values_config === false  )
+		if( is_array( $updated_config ) )
 		{
-			$values_config = $this->_config;
+			$this->_config= array_merge( $this->_config, $updated_config );
 		}
 
-		if( is_array( $defaults_config ) )
-		{
-			$configs = array_merge( $defaults_config, $values_config );
-		}
-
-		return $configs;
+		return $this->_config;
 	}
 
 }
