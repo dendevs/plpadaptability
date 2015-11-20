@@ -1,6 +1,6 @@
-# PlpAdaptability
+# PlpSkeleton
 
-[![Build Status](https://travis-ci.org/dendevs/plpadaptability.svg)](https://travis-ci.org/dendevs/plpadaptability)
-[![Coverage Status](https://coveralls.io/repos/dendevs/plpadaptability/badge.svg?branch=master&service=github)](https://coveralls.io/github/dendevs/plpadaptability?branch=master)
+[![Build Status](https://travis-ci.org/dendevs/plpskeleton.svg)](https://travis-ci.org/dendevs/plpskeleton)
+[![Coverage Status](https://coveralls.io/repos/dendevs/plpskeleton/badge.svg?branch=master&service=github)](https://coveralls.io/github/dendevs/plpskeleton?branch=master)
 
 *For service in single or kernel usage*
