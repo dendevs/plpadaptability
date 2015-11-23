@@ -15,7 +15,7 @@ class NoKernel
 
 
     /**
-     * Set la config.
+     * Constructor
      */
     public function __construct()
     {
@@ -23,23 +23,15 @@ class NoKernel
     }
 
     /**
-     * Merge la config general du kernl avec la config par defaut du service.
+     * Ajout la configuration du service au kernel
      *
-     * La config kernel a la priorite sur celle du service.
-     * Le but est de pouvoir customiser le service via le kernel
-     *
-     * @param array $default_service_configs tableau associatif config valeur
-     *
-     * @return array la config merger
+     * @param array $service_config tableau de configuration du service
+     * 
+     * @return array tableau de Configuration
      */
-    public function merge_configs( $default_service_configs )
+    public function set_config( $service_config )
     {
-        if( ( bool ) $default_service_configs ) // better than is_array
-        {
-            $this->_config = array_merge( $default_service_configs, $this->_config );
-        }
-
-
+        $this->_config = $service_config;
         return $this->_config;
     }
 

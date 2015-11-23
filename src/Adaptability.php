@@ -104,17 +104,9 @@ abstract class Adaptability implements AdaptabilityInterface
         if( ! $krl )
         {
             $krl = new NoKernel();
+            $krl->set_config( $this->get_default_configs() );
         }
 
-        // merge config
-        $default_service_configs= array();
-        if( method_exists( $this, 'get_default_configs' ) )
-        {
-            $default_service_configs = $this->get_default_configs();
-        }
-        $krl->merge_configs( $default_service_configs );
-
-        // end
         $this->_krl = $krl;
     }
 }

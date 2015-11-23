@@ -11,18 +11,11 @@ class NoKernelTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( 'DenDev\Plpadaptability\NoKernel', $object );
 	}
 
-	public function test_merge_configs()
-	{
-		$object = new NoKernel();
-		$default_service_configs = array( 'test1' => 'ok value 1' );
-		$this->assertEquals( $default_service_configs, $object->merge_configs( $default_service_configs ) );
-	}
-
 	public function test_get_config_value()
 	{
 		$object = new NoKernel();
 		$default_service_configs = array( 'test1' => 'ok value 1' );
-		$object->merge_configs( $default_service_configs );
+		$this->assertEquals( $default_service_configs, $object->set_config( $default_service_configs ) );
 		$this->assertEquals( 'ok value 1', $object->get_config_value( 'test1' ) );
 	}
 
