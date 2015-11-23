@@ -44,12 +44,14 @@ class NoKernel
     }
 
     /**
-     * Recupere la valeur d'un option de configuration.
+     * Recupere la valeur de l'option demander.
      *
-     * @param string config_name nom de l'option
-     * @param mixed $default_value valeur si l'option n'existe pas, false par default
+     * Donne une valeur par default si non trouver et argument 2 exists
      *
-     * @return mixed|false la valeur ou false si rien trouver
+     * @param string $config_name nom de l'option de Configuration a retrouver service.option_name.sous_option
+     * @param string $default_value false par defaut. 
+     *
+     * @return false|mixed la valeur de l'option
      */
     public function get_config_value( $config_name, $default_value = false )
     {
