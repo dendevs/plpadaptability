@@ -50,6 +50,16 @@ abstract class Adaptability implements AdaptabilityInterface
     }
 
     /**
+     * Donne l'instance du service enfant
+     *
+     * @return object instance du service
+     */
+    public function get_service_instance()
+    {
+        return $this;
+    }
+
+    /**
      * Delegue au kernel la recuperation d'une valeur de configuration.
      *
      * @param string $config_name nom de l'option

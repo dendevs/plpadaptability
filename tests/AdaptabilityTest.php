@@ -10,6 +10,7 @@ class AdaptabilityTest extends \PHPUnit_Framework_TestCase
 		$object = new ChildAdaptability();
 		$this->assertInstanceOf( "DenDev\Plpadaptability\Adaptability", $object );
 		$this->assertInstanceOf( "DenDev\Plpadaptability\Test\ChildAdaptability", $object );
+		$this->assertInstanceOf( "DenDev\Plpadaptability\Test\ChildAdaptability", $object->get_service_instance() );
 	}
 
 	public function test_get_service_metas()
@@ -72,5 +73,4 @@ class ChildAdaptability extends Adaptability
 			'service_version' => '111',
 			);
 	}
-
 }

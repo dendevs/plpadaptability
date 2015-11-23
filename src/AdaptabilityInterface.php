@@ -15,4 +15,11 @@ interface AdaptabilityInterface
      * Ajoute quelques infos comme la version, etc
      */
     public function set_service_metas();
+
+    /**
+     * Renvoi l'instance du service enfant
+     *
+     * @return object instance du service
+     */ 
+    public function get_service_instance();
 }
