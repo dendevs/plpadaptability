@@ -22,4 +22,15 @@ interface AdaptabilityInterface
      * @return object instance du service
      */ 
     public function get_service_instance();
+
+    /**
+     * Donne la configuration complete du service
+     *
+     * Ou la configuration complete de tout les services
+     *
+     * @param string $service_name nom du service ou false
+     *
+     * @return array tableau associatif de configuration
+     */
+    public function get_config_values( $service_name = false );
 }

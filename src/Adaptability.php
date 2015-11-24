@@ -73,6 +73,16 @@ abstract class Adaptability implements AdaptabilityInterface
     }
 
     /**
+     * Retourne toute la configuration.
+     *
+     * @return array tableau ou tableau de tableau de config
+     */
+    public function get_config_values( $service_name = false )
+    {
+        return $this->_krl->get_config_values( $service_name );
+    }
+
+    /**
      * Ecriture de log basique ou via service du kernel
      *
      * @param string $log_name nom du logger, si service de base alors non fichier

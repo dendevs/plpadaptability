@@ -61,6 +61,20 @@ class NoKernel
     }
 
     /**
+     * Retourne toute la configuration.
+     *
+     * Renvoi toute la config d'un service ou de tout les services
+     *
+     * @param string $service_name le nom du service dont on veut tout
+     *
+     * @return array tableau ou tableau de tableau de config
+     */
+    public function get_config_values( $service_name = false ) // pour etre identique a Kernel
+    {
+        return $this->_configs;
+    }
+
+    /**
      * Ecriture de log basique.
      *
      * Le logs est ecrit dans /tmp par defaut. 
@@ -84,17 +98,17 @@ class NoKernel
         {
             mkdir( $log_path, 0755 );
         }
-        
+
         $log_path .= $log_name . ".log";
 
         // avoid big file
         $append = false;
         if( file_exists( $log_path ) && filesize( $log_path ) >= 1024 )
         {
-        //    unlink( $log_path );
+            //    unlink( $log_path );
             $append = FILE_APPEND;
         }
-        
+
         // write
         $context_string = ( (bool) $context ) ? print_r( $context, true ) : '';
         $formated_message = $level . ': ' . $message . ' ( ' . $context_string . ' )';
@@ -125,7 +139,7 @@ class NoKernel
 
         $context_string = ( (bool) $context ) ? print_r( $context, true ) : '';
         $formated_message = $level . ': ' . $message . ' ( ' . $context_string . ' )';
-        
+
         $ok = $this->log( $service_name, 'error', $level, $formated_message, $context_string );
 
         // error
