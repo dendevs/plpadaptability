@@ -13,7 +13,7 @@ use DenDev\Plpadaptability\AdaptabilityInterface;
 abstract class Adaptability implements AdaptabilityInterface
 {
     /** @var object kernel offrant les services */
-    private $_krl;
+    protected $_krl;
     /** @var array tableau associatif nom service, version, ... */
     protected $_service_metas;
 
