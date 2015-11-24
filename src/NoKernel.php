@@ -71,7 +71,7 @@ class NoKernel
      */
     public function get_config_values( $service_name = false ) // pour etre identique a Kernel
     {
-        return $this->_configs;
+        return $this->_config;
     }
 
     /**
